@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-controller</title>
+</head>
+<body ng-app="myApp">
+<div >
+    <input type="text" placeholder="111" ng-model="apple">
+    <input type="text" placeholder="222" ng-model="hello">
+    <br>
+    <p>{{apple+'---'+hello}}</p>
+</div>
+<div ng-controller="myCtrl">
+    <input type="text" placeholder="333" ng-model="three">
+    <input type="text" placeholder="444" ng-model="four">
+    <br>
+    <!--three和four会被赋予初始值3333，44444-->
+    <p>{{three+'@'+four}}</p>
+</div>
+</body>
+<script src="../libs/angular.js"></script>
+<script>
+var app=angular.module('myApp',[]);//定义模块
+app.controller('myCtrl',function ($scope) {//控制器
+    $scope.three='3333';
+    $scope.four='44444';
+})
+</script>
+</html>
