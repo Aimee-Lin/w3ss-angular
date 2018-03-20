@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div ng-app="app" ng-controller="myCtrl">
+        <p>{{name}}</p>
+        <button ng-click="aa()">切换</button>
+        <button ng-click="bb()">去掉缓存</button>
+    </div>
+
+</body>
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<!--<script src="../angular.js"></script>-->
+<script>
+var app=angular.module('app',[]);
+app.controller('myCtrl',function ($scope) {
+    $scope.flag="true";
+    $scope.name='苹果';
+    console.log(window.sessionStorage.length)
+    if(window.sessionStorage.length!=0){
+//        获得存储的内容
+        $scope.name=window.sessionStorage.getItem('info');
+        $scope.flag=window.sessionStorage.getItem('change')
+    }
+    $scope.aa=function () {
+        console.log($scope.flag)
+//        $scope.flag=!$scope.flag
+        if($scope.flag=="true"){
+            $scope.flag="false";
+            $scope.name='apple';
+            console.log('apple',$scope.flag)
+        }else{
+            $scope.flag="true";
+            $scope.name='苹果';
+            console.log('苹果',$scope.flag)
+        }
+//        存储
+        window.sessionStorage.setItem('info',$scope.name);
+        window.sessionStorage.setItem('change',$scope.flag);
+    };
+//    去除缓存
+    $scope.bb=function () {
+        window.sessionStorage.removeItem('info');
+        window.sessionStorage.removeItem('change');
+    }
+})
+
+
+</script>
+
+</html>
